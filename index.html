@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
  <head>
-     <title>Title Case</title>
+     <title>Get Even</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/nav.css">
   <link rel="stylesheet" href="css/forms.css">
   <style>
-    #output{
+    #container{
       border-radius:5px;
       min-height:40px;
       border:1px solid black;
@@ -20,7 +20,7 @@
  </head>
  <body>
      <header>
-     <h1 class="page-header">Title Case</h1>
+     <h1 class="page-header">Get Even</h1>
         <nav class="topnav" id="myTopnav">
             <a href="index.html" class="active">Home</a>
             <a href="#">Link</a>
@@ -31,11 +31,9 @@
      
    <main class="wrapper">
  
-    <h2>How it Works</h2>
-    <p>This is a helpful webpage to convert text into title case. It allows users to enter text in a specific input field and convert it into title case with just a click of a button. Title case means that the first letter of each word is capitalized, while the rest of the letters are in lowercase. After the user clicks the submit button, the converted text is displayed on the page, making it easier to read and aesthetically pleasing. This function saves users time and effort by automating the process of converting text into title case.</p>
     <h2 class="subheader">Place form code below:</h2>
-    <div id="output">Output goes here</div>
-    <form method="post" action="" class="main-form">
+    <div id="output">Output goes here
+    <form method="get" action="" class="main-form">
       <div>
         <label for="input">input</label><br>
         <input type="text" name="input" id="input" placeholder="input" required autofocus>
@@ -43,6 +41,7 @@
         <input type="submit" id="submit">
       </div>
     </form>
+  </div>
     <h3>Page Origins</h3>
     <p>The HTML/CSS comes from Sara Newman's Web Fundamentals class as taught at Seattle Central. This page provides a basis for students to build a responsive portal page.</p>
     <p>The mobile navigation originates from <a href="https://www.w3schools.com/howto/howto_js_mobile_navbar.asp" target="_blank">W3Schools</a></p>
@@ -55,22 +54,24 @@
     </footer>
   </main>
   <script src="js/main.js"></script>
-
   <script>
+    const queryString = window.location.search;
+    console.log(queryString);
 
-  function titleCase(str){
-    return = str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-  }
-    const mySubmit = document.querySelector("#submit");
-    console.log(mySubmit);
+    const urlParams = new URLSearchParams(queryString);
 
-  mySubmit.addEventListener("click",function(ev){
-    ev.preventDefault();
-    const myInput = document.querySelector("#input");
-    const myOutput = document.querySelector("#output");
-    myOutput.innerHTML = titleCase(myInput.value);
-    //alert(myInput.value);
-  });
+    if(queryString.length>0){//data submitted
+      let myOutput = `<div id="container">`;
+      if(urlParams.has("input")){
+        //alert(urlParams.get("input"));
+        let myInput = urlParams.get("input");
+        myOutput += `<p>You typed ${myInput}</p>`;
+      }
+      myOutput += `</div>`;
+      document.querySelector("#output").innerHTML = myOutput;
+
+    }
+
   </script>   
  </body>
 </html>
