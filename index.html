@@ -30,6 +30,12 @@
      </header>
      
    <main class="wrapper">
+
+    <p>In this webpage, we have perfected the art of form submission and data processing using the get method via the query string.</p>
+
+      <p>One of the key highlights of this page is the 'getEven()' function. This powerful function takes a number as input and works its magic, returning a 'true' value if the number is even. It's a versatile tool that you can integrate seamlessly into your code.</p>
+      
+      <p>this page offers an exciting and practical learning experience. Explore the functionalities, experiment with different forms, and witness the impressive results firsthand.</p>
  
     <h2 class="subheader">Place form code below:</h2>
     <div id="output">Output goes here
@@ -55,6 +61,17 @@
   </main>
   <script src="js/main.js"></script>
   <script>
+
+
+    function getEven(num){
+      if(num % 2 == 0){//even
+        return true;
+      }else{//odd
+        return false;
+      }
+
+    }
+
     const queryString = window.location.search;
     console.log(queryString);
 
@@ -65,12 +82,22 @@
       if(urlParams.has("input")){
         //alert(urlParams.get("input"));
         let myInput = urlParams.get("input");
-        myOutput += `<p>You typed ${myInput}</p>`;
-      }
-      myOutput += `</div>`;
-      document.querySelector("#output").innerHTML = myOutput;
+        
+        if(getEven(myInput)){//even
+          myOutput += `<p>You typed <b>${myInput}</b> and its an even number!</p>`;
 
-    }
+        }else{//odd
+          myOutput += `<p>You typed <b>${myInput}</b> and its an odd number!</p>`;
+        }
+
+
+
+      }
+    myOutput += `<p><a href="index.html">CLEAR</a></p>`;
+    myOutput += `</div>`;
+    document.querySelector("#output").innerHTML = myOutput;
+
+  }
 
   </script>   
  </body>
